@@ -1,1 +1,4 @@
 *.o
+/.vs
+/CxImageFull_vc14.VC.VC.opendb
+/CxImageFull_vc14.VC.db
