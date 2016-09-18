@@ -25,7 +25,7 @@
 
 #include "../tiff/tiffio.h"
 
-class DLL_EXP CxImageTIF: public CxImage
+class CXIMAGE_DLL_EXP CxImageTIF: public CxImage
 {
 public:
 	CxImageTIF(): CxImage(CXIMAGE_FORMAT_TIF) {m_tif2=NULL; m_multipage=false; m_pages=0;}

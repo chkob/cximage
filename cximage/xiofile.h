@@ -4,7 +4,7 @@
 #include "xfile.h"
 //#include <TCHAR.h>
 
-class DLL_EXP CxIOFile : public CxFile
+class CXIMAGE_DLL_EXP CxIOFile : public CxFile
 	{
 public:
 	CxIOFile(FILE* fp = NULL)

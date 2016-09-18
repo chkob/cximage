@@ -4,7 +4,7 @@
 #include "xfile.h"
 
 //////////////////////////////////////////////////////////
-class DLL_EXP CxMemFile : public CxFile
+class CXIMAGE_DLL_EXP CxMemFile : public CxFile
 {
 public:
 	CxMemFile(uint8_t* pBuffer = NULL, uint32_t size = 0);

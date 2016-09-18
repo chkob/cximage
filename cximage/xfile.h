@@ -50,7 +50,7 @@
 
 #include "ximadef.h"
 
-class DLL_EXP CxFile
+class CXIMAGE_DLL_EXP CxFile
 {
 public:
 	CxFile(void) { };

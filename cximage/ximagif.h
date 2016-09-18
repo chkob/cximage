@@ -61,7 +61,7 @@ typedef int16_t    code_int;
 
 
 class CImageIterator;
-class DLL_EXP CxImageGIF: public CxImage
+class CXIMAGE_DLL_EXP CxImageGIF: public CxImage
 {
 #pragma pack(1)
 

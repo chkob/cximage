@@ -4,7 +4,7 @@
 #include "ximadef.h"
 
 //***bd*** simple floating point point
-class DLL_EXP CxPoint2
+class CXIMAGE_DLL_EXP CxPoint2
 {
 public:
   CxPoint2();
@@ -18,7 +18,7 @@ public:
 };
 
 //and simple rectangle
-class DLL_EXP CxRect2
+class CXIMAGE_DLL_EXP CxRect2
 {
 public:
   CxRect2();

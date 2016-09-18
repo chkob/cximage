@@ -38,7 +38,7 @@ extern "C" {
 #endif
 }
 
-class DLL_EXP CxImageJPG: public CxImage
+class CXIMAGE_DLL_EXP CxImageJPG: public CxImage
 {
 public:
 	CxImageJPG();
@@ -92,7 +92,7 @@ public:
 #define EXIF_READ_IMAGE 0x02
 #define EXIF_READ_ALL   0x03
 
-class DLL_EXP CxExifInfo
+class CXIMAGE_DLL_EXP CxExifInfo
 {
 
 typedef struct tag_Section_t{

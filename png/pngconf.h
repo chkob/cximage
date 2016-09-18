@@ -262,7 +262,7 @@
 #ifndef PNG_IMPEXP
 #  ifdef PNGLIB_BUILD
     /* Building the library */
-#    if (defined(DLL_EXPORT)/*from libtool*/ ||\
+#    if (defined(CXIMAGE_DLL_EXPORT)/*from libtool*/ ||\
         defined(_WINDLL) || defined(_DLL) || defined(__DLL__) ||\
         defined(_USRDLL) ||\
         defined(PNG_BUILD_DLL)) && defined(PNG_DLL_EXPORT)
