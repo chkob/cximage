@@ -1,6 +1,6 @@
 // xImaPal.cpp : Palette and Pixel functions
 /* 07/08/2001 v1.00 - Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  */
 
 #include "ximage.h"
@@ -767,6 +767,85 @@ void CxImage::DrawLine(int32_t StartX, int32_t EndX, int32_t StartY, int32_t End
 		x += xinc2;                 // Change the x as appropriate
 		y += yinc2;                 // Change the y as appropriate
 	}
+}
+////////////////////////////////////////////////////////////////////////////////
+bool CxImage::SetRectColor(RECT& rect, RGBQUAD color, bool bSetAlpha)
+{
+	return SetRectColor(rect.left, rect.top, rect.right, rect.bottom, color, bSetAlpha);
+}
+////////////////////////////////////////////////////////////////////////////////
+bool CxImage::SetRectColor(int32_t left, int32_t top, int32_t right, int32_t bottom, RGBQUAD color, bool bSetAlpha)
+{
+	if (!pDib) return false;
+
+	int32_t startx = max(0L,min(left,head.biWidth));
+	int32_t endx = max(0L,min(right,head.biWidth));
+	int32_t starty = head.biHeight - max(0L,min(top,head.biHeight));
+	int32_t endy = head.biHeight - max(0L,min(bottom,head.biHeight));
+
+	if (startx==endx || starty==endy) return true;
+
+	if (startx>endx) {int32_t tmp=startx; startx=endx; endx=tmp;}
+	if (starty>endy) {int32_t tmp=starty; starty=endy; endy=tmp;}
+
+	switch (head.biBitCount) {
+	case 1:
+	case 4:
+	{
+		uint8_t n = GetNearestIndex(color);
+		for(int32_t y=starty; y<endy; y++){
+			info.nProgress = (int32_t)(100*(y-starty)/(endy-starty));
+			for(int32_t x=startx; x<endx; x++){
+				BlindSetPixelIndex(x,y,n);
+			}
+		}
+		break;
+	}
+	case 8:
+	{
+		uint8_t n = GetNearestIndex(color);
+		int32_t linelen = (endx - startx) * head.biBitCount >> 3;
+		uint8_t* pDest = info.pImage + starty * info.dwEffWidth + (startx*head.biBitCount >> 3);
+		for(int32_t y=starty; y<endy; y++){
+			info.nProgress = (int32_t)(100*(y-starty)/(endy-starty));
+			memset(pDest,n,linelen);
+			pDest+=info.dwEffWidth;
+		}
+		break;
+	}
+	case 24:
+	{
+		int32_t linelen = (endx - startx) * head.biBitCount >> 3;
+		uint8_t* pSrc = (uint8_t*)malloc(linelen);
+		if (0 == pSrc) return false;
+		for(int32_t x=0; x<linelen;){
+			pSrc[x++]=color.rgbBlue;
+			pSrc[x++]=color.rgbGreen;
+			pSrc[x++]=color.rgbRed;
+		}
+		uint8_t* pDest = info.pImage + starty * info.dwEffWidth + (startx*head.biBitCount >> 3);
+		for(int32_t y=starty; y<endy; y++){
+			info.nProgress = (int32_t)(100*(y-starty)/(endy-starty));
+			memcpy(pDest,pSrc,linelen);
+			pDest+=info.dwEffWidth;
+		}
+		free(pSrc);
+    }
+	}
+
+#if CXIMAGE_SUPPORT_ALPHA
+	if (bSetAlpha){
+		AlphaCreate();
+		if (!AlphaIsValid()) return false;
+		uint8_t* pDest = pAlpha + startx + starty*head.biWidth;
+		for (int32_t y=starty; y<endy; y++){
+			memset(pDest,color.rgbReserved,endx-startx);
+			pDest+=head.biWidth;
+		}
+	}
+#endif //CXIMAGE_SUPPORT_ALPHA
+
+	return true;
 }
 ////////////////////////////////////////////////////////////////////////////////
 /**

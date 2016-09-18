@@ -1,6 +1,6 @@
 // ximainfo.cpp : main attributes
 /* 03/10/2004 v1.00 - Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  */
 
 #include "ximage.h"
@@ -947,12 +947,12 @@ uint32_t CxImage::UnDump(const uint8_t * src)
  */
 const float CxImage::GetVersionNumber()
 {
-	return 7.000010000f;
+	return 7.000020000f;
 }
 ////////////////////////////////////////////////////////////////////////////////
 const TCHAR* CxImage::GetVersion()
 {
-	static const TCHAR CxImageVersion[] = _T("CxImage 7.0.1");
+	static const TCHAR CxImageVersion[] = _T("CxImage 7.0.2");
 	return (CxImageVersion);
 }
 ////////////////////////////////////////////////////////////////////////////////

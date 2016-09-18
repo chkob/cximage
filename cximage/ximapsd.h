@@ -17,7 +17,7 @@
 
 #if CXIMAGE_SUPPORT_PSD
 
-#define CXIMAGE_USE_LIBPSD 0
+#define CXIMAGE_USE_LIBPSD 1
 
 #if CXIMAGE_USE_LIBPSD
  extern "C" {

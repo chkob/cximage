@@ -1,6 +1,6 @@
 // xImaInt.cpp : interpolation functions
 /* 02/2004 - Branko Brevensek 
- * CxImage version 7.0.1 07/Jan/2011 - Davide Pizzolato - www.xdp.it
+ * CxImage version 7.0.2 07/Feb/2011 - Davide Pizzolato - www.xdp.it
  */
 
 #include "ximage.h"

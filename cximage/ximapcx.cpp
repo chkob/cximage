@@ -2,7 +2,7 @@
  * File:	ximapcx.cpp
  * Purpose:	Platform Independent PCX Image Class Loader and Writer
  * 05/Jan/2002 Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  *
  * based on ppmtopcx.c - convert a portable pixmap to PCX
  * Copyright (C) 1994 by Ingo Wilken (Ingo.Wilken@informatik.uni-oldenburg.de)

@@ -8,7 +8,7 @@
 // Generated from the TEXTINCLUDE 2 resource.
 //
 #include "resource.h"
-#include "afxres.h"
+#include "winresrc.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -29,8 +29,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 7,0,1,0
- PRODUCTVERSION 7,0,1,0
+ FILEVERSION 7,0,2,0
+ PRODUCTVERSION 7,0,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -45,17 +45,17 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "Comments", "CxImage 7.0.1.0  MFC DLL\0"
+            VALUE "Comments", "CxImage 7.0.2.0  MFC DLL\0"
             VALUE "CompanyName", "Pizzolato Davide - www.xdp.it\0"
             VALUE "FileDescription", "cximage\0"
-            VALUE "FileVersion", "7, 0, 1, 0\0"
+            VALUE "FileVersion", "7, 0, 2, 0\0"
             VALUE "InternalName", "cximage\0"
             VALUE "LegalCopyright", "Copyright © 2001 - 2011\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "cximage.dll\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "cximage\0"
-            VALUE "ProductVersion", "7, 0, 1, 0\0"
+            VALUE "ProductVersion", "7, 0, 2, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END

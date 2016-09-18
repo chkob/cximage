@@ -7,7 +7,7 @@
 
 	COPYRIGHT NOTICE, DISCLAIMER, and LICENSE:
 
-	CxImage version 7.0.1 07/Jan/2011
+	CxImage version 7.0.2 07/Feb/2011
 
 	CxImage : Copyright (C) 2001 - 2010, Davide Pizzolato
 
@@ -405,6 +405,8 @@ public:
 	void	DrawLine(int32_t StartX, int32_t EndX, int32_t StartY, int32_t EndY, RGBQUAD color, bool bSetAlpha=false);
 	void	DrawLine(int32_t StartX, int32_t EndX, int32_t StartY, int32_t EndY, COLORREF cr);
 	void	BlendPixelColor(int32_t x,int32_t y,RGBQUAD c, float blend, bool bSetAlpha = false);
+	bool	SetRectColor(int32_t left, int32_t top, int32_t right, int32_t bottom, RGBQUAD color, bool bSetAlpha = false);
+	bool	SetRectColor(RECT& rect, RGBQUAD color, bool bSetAlpha = false);
 //@}
 
 protected:

@@ -2,7 +2,7 @@
  * File:	ximapng.cpp
  * Purpose:	Platform Independent PNG Image Class Loader and Writer
  * 07/Aug/2001 Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  */
 
 #include "ximapng.h"
