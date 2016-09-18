@@ -2,7 +2,7 @@
  * jdmerge.c
  *
  * Copyright (C) 1994-1996, Thomas G. Lane.
- * Modified 2013 by Guido Vollbeding.
+ * Modified 2013-2015 by Guido Vollbeding.
  * This file is part of the Independent JPEG Group's software.
  * For conditions of distribution and use, see the accompanying README file.
  *
@@ -24,7 +24,7 @@
  * multiplications needed for color conversion.
  *
  * This file currently provides implementations for the following cases:
- *	YCbCr => RGB color conversion only.
+ *	YCC => RGB color conversion only (YCbCr or BG_YCC).
  *	Sampling ratios of 2h1v or 2h2v.
  *	No scaling needed at upsample time.
  *	Corner-aligned (non-CCIR601) sampling alignment.
@@ -76,12 +76,13 @@ typedef my_upsampler * my_upsample_ptr;
 
 
 /*
- * Initialize tables for YCC->RGB colorspace conversion.
+ * Initialize tables for YCbCr->RGB and BG_YCC->RGB colorspace conversion.
  * This is taken directly from jdcolor.c; see that file for more info.
  */
 
 LOCAL(void)
 build_ycc_rgb_table (j_decompress_ptr cinfo)
+/* Normal case, sYCC */
 {
   my_upsample_ptr upsample = (my_upsample_ptr) cinfo->upsample;
   int i;
@@ -115,6 +116,46 @@ build_ycc_rgb_table (j_decompress_ptr cinfo)
     /* Cb=>G value is scaled-up -0.344136286 * x */
     /* We also add in ONE_HALF so that need not do it in inner loop */
     upsample->Cb_g_tab[i] = (- FIX(0.344136286)) * x + ONE_HALF;
+  }
+}
+
+
+LOCAL(void)
+build_bg_ycc_rgb_table (j_decompress_ptr cinfo)
+/* Wide gamut case, bg-sYCC */
+{
+  my_upsample_ptr upsample = (my_upsample_ptr) cinfo->upsample;
+  int i;
+  INT32 x;
+  SHIFT_TEMPS
+
+  upsample->Cr_r_tab = (int *)
+    (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
+				(MAXJSAMPLE+1) * SIZEOF(int));
+  upsample->Cb_b_tab = (int *)
+    (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
+				(MAXJSAMPLE+1) * SIZEOF(int));
+  upsample->Cr_g_tab = (INT32 *)
+    (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
+				(MAXJSAMPLE+1) * SIZEOF(INT32));
+  upsample->Cb_g_tab = (INT32 *)
+    (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
+				(MAXJSAMPLE+1) * SIZEOF(INT32));
+
+  for (i = 0, x = -CENTERJSAMPLE; i <= MAXJSAMPLE; i++, x++) {
+    /* i is the actual input pixel value, in the range 0..MAXJSAMPLE */
+    /* The Cb or Cr value we are thinking of is x = i - CENTERJSAMPLE */
+    /* Cr=>R value is nearest int to 2.804 * x */
+    upsample->Cr_r_tab[i] = (int)
+		    RIGHT_SHIFT(FIX(2.804) * x + ONE_HALF, SCALEBITS);
+    /* Cb=>B value is nearest int to 3.544 * x */
+    upsample->Cb_b_tab[i] = (int)
+		    RIGHT_SHIFT(FIX(3.544) * x + ONE_HALF, SCALEBITS);
+    /* Cr=>G value is scaled-up -1.428272572 * x */
+    upsample->Cr_g_tab[i] = (- FIX(1.428272572)) * x;
+    /* Cb=>G value is scaled-up -0.688272572 * x */
+    /* We also add in ONE_HALF so that need not do it in inner loop */
+    upsample->Cb_g_tab[i] = (- FIX(0.688272572)) * x + ONE_HALF;
   }
 }
 
@@ -375,7 +416,7 @@ jinit_merged_upsampler (j_decompress_ptr cinfo)
   upsample = (my_upsample_ptr)
     (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_IMAGE,
 				SIZEOF(my_upsampler));
-  cinfo->upsample = (struct jpeg_upsampler *) upsample;
+  cinfo->upsample = &upsample->pub;
   upsample->pub.start_pass = start_pass_merged_upsample;
   upsample->pub.need_context_rows = FALSE;
 
@@ -395,6 +436,9 @@ jinit_merged_upsampler (j_decompress_ptr cinfo)
     upsample->spare_row = NULL;
   }
 
+  if (cinfo->jpeg_color_space == JCS_BG_YCC)
+    build_bg_ycc_rgb_table(cinfo);
+  else
   build_ycc_rgb_table(cinfo);
 }
 
