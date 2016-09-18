@@ -2,6 +2,7 @@
  * jccoefct.c
  *
  * Copyright (C) 1994-1997, Thomas G. Lane.
+ * Modified 2003-2011 by Guido Vollbeding.
  * This file is part of the Independent JPEG Group's software.
  * For conditions of distribution and use, see the accompanying README file.
  *
@@ -183,7 +184,7 @@ compress_data (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
 			    ypos, xpos, (JDIMENSION) blockcnt);
 	    if (blockcnt < compptr->MCU_width) {
 	      /* Create some dummy blocks at the right edge of the image. */
-	      jzero_far((void FAR *) coef->MCU_buffer[blkn + blockcnt],
+	      FMEMZERO((void FAR *) coef->MCU_buffer[blkn + blockcnt],
 			(compptr->MCU_width - blockcnt) * SIZEOF(JBLOCK));
 	      for (bi = blockcnt; bi < compptr->MCU_width; bi++) {
 		coef->MCU_buffer[blkn+bi][0][0] = coef->MCU_buffer[blkn+bi-1][0][0];
@@ -191,7 +192,7 @@ compress_data (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
 	    }
 	  } else {
 	    /* Create a row of dummy blocks at the bottom of the image. */
-	    jzero_far((void FAR *) coef->MCU_buffer[blkn],
+	    FMEMZERO((void FAR *) coef->MCU_buffer[blkn],
 		      compptr->MCU_width * SIZEOF(JBLOCK));
 	    for (bi = 0; bi < compptr->MCU_width; bi++) {
 	      coef->MCU_buffer[blkn+bi][0][0] = coef->MCU_buffer[blkn-1][0][0];
@@ -290,7 +291,7 @@ compress_first_pass (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
       if (ndummy > 0) {
 	/* Create dummy blocks at the right edge of the image. */
 	thisblockrow += blocks_across; /* => first dummy block */
-	jzero_far((void FAR *) thisblockrow, ndummy * SIZEOF(JBLOCK));
+	FMEMZERO((void FAR *) thisblockrow, ndummy * SIZEOF(JBLOCK));
 	lastDC = thisblockrow[-1][0];
 	for (bi = 0; bi < ndummy; bi++) {
 	  thisblockrow[bi][0] = lastDC;
@@ -309,7 +310,7 @@ compress_first_pass (j_compress_ptr cinfo, JSAMPIMAGE input_buf)
 	   block_row++) {
 	thisblockrow = buffer[block_row];
 	lastblockrow = buffer[block_row-1];
-	jzero_far((void FAR *) thisblockrow,
+	FMEMZERO((void FAR *) thisblockrow,
 		  (size_t) (blocks_across * SIZEOF(JBLOCK)));
 	for (MCUindex = 0; MCUindex < MCUs_across; MCUindex++) {
 	  lastDC = lastblockrow[h_samp_factor-1][0];
