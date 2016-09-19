@@ -7,33 +7,33 @@
 class CXIMAGE_DLL_EXP CxPoint2
 {
 public:
-  CxPoint2();
-  CxPoint2(float const x_, float const y_);
-  CxPoint2(CxPoint2 const &p);
+   CxPoint2();
+   CxPoint2(float const x_, float const y_);
+   CxPoint2(CxPoint2 const &p);
 
-  float Distance(CxPoint2 const p2);
-  float Distance(float const x_, float const y_);
+   float Distance(CxPoint2 const p2);
+   float Distance(float const x_, float const y_);
 
-  float x,y;
+   float x, y;
 };
 
 //and simple rectangle
 class CXIMAGE_DLL_EXP CxRect2
 {
 public:
-  CxRect2();
-  CxRect2(float const x1_, float const y1_, float const x2_, float const y2_);
-  CxRect2(CxPoint2 const &bl, CxPoint2 const &tr);
-  CxRect2(CxRect2 const &p);
+   CxRect2();
+   CxRect2(float const x1_, float const y1_, float const x2_, float const y2_);
+   CxRect2(CxPoint2 const &bl, CxPoint2 const &tr);
+   CxRect2(CxRect2 const &p);
 
-  float Surface() const;
-  CxRect2 CrossSection(CxRect2 const &r2) const;
-  CxPoint2 Center() const;
-  float Width() const;
-  float Height() const;
+   float Surface() const;
+   CxRect2 CrossSection(CxRect2 const &r2) const;
+   CxPoint2 Center() const;
+   float Width() const;
+   float Height() const;
 
-  CxPoint2 botLeft;
-  CxPoint2 topRight;
+   CxPoint2 botLeft;
+   CxPoint2 topRight;
 };
 
 #endif
