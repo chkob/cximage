@@ -28,9 +28,12 @@ extern "C" {
 #include <pngstruct.h>
 #include <pnginfo.h>
 #else
+#ifdef USE_LIBPNG
 #include "../png/png.h"
 #include "../png/pngstruct.h"
 #include "../png/pnginfo.h"
+#else // use lodepng
+#endif
 #endif
 }
 
@@ -60,6 +63,8 @@ public:
       ENCODE_DEFAULT_COMPRESSION = 4 << 1
    };
 
+#if defined(_LINUX) || defined(USE_LIBPNG)
+
 protected:
    void ima_png_error(png_struct *png_ptr, char *message);
    void expand2to4bpp(uint8_t* prow);
@@ -88,6 +93,8 @@ protected:
       //longjmp(png_ptr->png_jmpbuf, 1);
       png_jmpbuf(png_ptr);
    }
+#else // use lodepng
+#endif
 };
 
 #endif
