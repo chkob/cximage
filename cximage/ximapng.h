@@ -86,7 +86,7 @@ protected:
    {
       strncpy((char*)png_ptr->error_ptr, error_msg, 255);
       //longjmp(png_ptr->png_jmpbuf, 1);
-      png_jmpbuf(png_ptr);
+      longjmp(png_jmpbuf(png_ptr),1);
    }
 };
 
