@@ -14,7 +14,7 @@
 
 #if CXIMAGE_SUPPORT_ICO
 
-class CxImageICO : public CxImage
+class CXIMAGE_DLL_EXP CxImageICO : public CxImage
 {
    typedef struct tagIconDirectoryEntry {
       uint8_t  bWidth;

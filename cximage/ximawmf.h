@@ -69,7 +69,7 @@
 
 #if CXIMAGE_SUPPORT_WMF && CXIMAGE_SUPPORT_WINDOWS
 
-class CxImageWMF : public CxImage
+class CXIMAGE_DLL_EXP CxImageWMF : public CxImage
 {
 
 #pragma pack(1)

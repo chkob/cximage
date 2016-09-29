@@ -22,7 +22,7 @@
 #include "../jasper/include/jasper/jasper.h"
 #endif
 
-class CxImageJAS : public CxImage
+class CXIMAGE_DLL_EXP CxImageJAS : public CxImage
 {
 public:
    CxImageJAS() : CxImage((uint32_t)0) {}	// <vho> cast to uint32_t

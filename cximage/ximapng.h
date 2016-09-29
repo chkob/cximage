@@ -34,7 +34,7 @@ extern "C" {
 #endif
 }
 
-class CxImagePNG : public CxImage
+class CXIMAGE_DLL_EXP CxImagePNG : public CxImage
 {
 public:
    CxImagePNG() : CxImage(CXIMAGE_FORMAT_PNG) {}

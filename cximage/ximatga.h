@@ -16,7 +16,7 @@
 
 #if CXIMAGE_SUPPORT_TGA
 
-class CxImageTGA : public CxImage
+class CXIMAGE_DLL_EXP CxImageTGA : public CxImage
 {
 #pragma pack(1)
    typedef struct tagTgaHeader

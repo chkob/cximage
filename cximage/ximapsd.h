@@ -25,7 +25,7 @@ extern "C" {
 }
 #endif
 
-class CxImagePSD : public CxImage
+class CXIMAGE_DLL_EXP CxImagePSD : public CxImage
 {
 
 public:

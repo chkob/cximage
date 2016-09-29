@@ -14,7 +14,7 @@
 
 #if CXIMAGE_SUPPORT_SKA
 
-class CxImageSKA : public CxImage
+class CXIMAGE_DLL_EXP CxImageSKA : public CxImage
 {
 #pragma pack(1)
    typedef struct tagSkaHeader {

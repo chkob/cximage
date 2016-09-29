@@ -16,7 +16,7 @@
 
 #if CXIMAGE_SUPPORT_PCX
 
-class CxImagePCX : public CxImage
+class CXIMAGE_DLL_EXP CxImagePCX : public CxImage
 {
    // PCX Image File
 #pragma pack(1)

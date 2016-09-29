@@ -20,7 +20,7 @@ extern "C" {
 #include "../jbig/jbig.h"
 };
 
-class CxImageJBG : public CxImage
+class CXIMAGE_DLL_EXP CxImageJBG : public CxImage
 {
 public:
    CxImageJBG() : CxImage(CXIMAGE_FORMAT_JBG) {}

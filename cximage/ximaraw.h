@@ -24,7 +24,7 @@ extern "C" {
 #include "../raw/libdcr.h"
 }
 
-class CxImageRAW : public CxImage
+class CXIMAGE_DLL_EXP CxImageRAW : public CxImage
 {
 
 public:

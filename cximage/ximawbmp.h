@@ -14,7 +14,7 @@
 
 #if CXIMAGE_SUPPORT_WBMP
 
-class CxImageWBMP : public CxImage
+class CXIMAGE_DLL_EXP CxImageWBMP : public CxImage
 {
 #pragma pack(1)
    typedef struct tagWbmpHeader

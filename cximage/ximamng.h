@@ -56,7 +56,7 @@ typedef struct tagmngstuff
    RGBQUAD		nBkgndColor;
 } mngstuff;
 
-class CxImageMNG : public CxImage
+class CXIMAGE_DLL_EXP CxImageMNG : public CxImage
 {
 public:
    CxImageMNG();
