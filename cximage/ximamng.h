@@ -4,17 +4,17 @@
  * Author:	Davide Pizzolato - www.xdp.it
  * Created:	2001
  */
-/* ==========================================================
- * CxImageMNG (c) 07/Aug/2001 Davide Pizzolato - www.xdp.it
- * For conditions of distribution and use, see copyright notice in ximage.h
- *
- * Special thanks to Frank Haug <f.haug(at)jdm(dot)de> for suggestions and code.
- *
- * original mng.cpp code created by Nikolaus Brennig, November 14th, 2000. <virtualnik(at)nol(dot)at>
- *
- * LIBMNG Copyright (c) 2000,2001 Gerard Juyn (gerard@libmng.com)
- * ==========================================================
- */
+ /* ==========================================================
+  * CxImageMNG (c) 07/Aug/2001 Davide Pizzolato - www.xdp.it
+  * For conditions of distribution and use, see copyright notice in ximage.h
+  *
+  * Special thanks to Frank Haug <f.haug(at)jdm(dot)de> for suggestions and code.
+  *
+  * original mng.cpp code created by Nikolaus Brennig, November 14th, 2000. <virtualnik(at)nol(dot)at>
+  *
+  * LIBMNG Copyright (c) 2000,2001 Gerard Juyn (gerard@libmng.com)
+  * ==========================================================
+  */
 
 #if !defined(__ximaMNG_h)
 #define __ximaMNG_h
@@ -23,7 +23,7 @@
 
 #if CXIMAGE_SUPPORT_MNG
 
-//#define MNG_NO_CMS
+  //#define MNG_NO_CMS
 #define MNG_SUPPORT_DISPLAY
 #define MNG_SUPPORT_READ
 #define	MNG_SUPPORT_WRITE
@@ -38,49 +38,49 @@ extern "C" {
 
 //uint32_t _stdcall RunMNGThread(void *lpParam);
 
-typedef struct tagmngstuff 
+typedef struct tagmngstuff
 {
-	CxFile		*file;
-	uint8_t		*image;
-	uint8_t		*alpha;
-	HANDLE		thread;
-	mng_uint32	delay;
-	mng_uint32  width;
-	mng_uint32  height;
-	mng_uint32  effwdt;
-	mng_int16	bpp;
-	mng_bool	animation;
-	mng_bool	animation_enabled;
-	float		speed;
-	int32_t		nBkgndIndex;
-	RGBQUAD		nBkgndColor;
+   CxFile		*file;
+   uint8_t		*image;
+   uint8_t		*alpha;
+   HANDLE		thread;
+   mng_uint32	delay;
+   mng_uint32  width;
+   mng_uint32  height;
+   mng_uint32  effwdt;
+   mng_int16	bpp;
+   mng_bool	animation;
+   mng_bool	animation_enabled;
+   float		speed;
+   int32_t		nBkgndIndex;
+   RGBQUAD		nBkgndColor;
 } mngstuff;
 
-class CxImageMNG: public CxImage
+class CXIMAGE_DLL_EXP CxImageMNG : public CxImage
 {
 public:
-	CxImageMNG();
-	~CxImageMNG();
+   CxImageMNG();
+   ~CxImageMNG();
 
-	bool Load(const TCHAR * imageFileName);
+   bool Load(const TCHAR * imageFileName);
 
-	bool Decode(CxFile * hFile);
-	bool Decode(FILE *hFile) { CxIOFile file(hFile); return Decode(&file); }
+   bool Decode(CxFile * hFile);
+   bool Decode(FILE *hFile) { CxIOFile file(hFile); return Decode(&file); }
 
 #if CXIMAGE_SUPPORT_ENCODE
-	bool Encode(CxFile * hFile);
-	bool Encode(FILE *hFile) { CxIOFile file(hFile); return Encode(&file); }
-	bool Save(const TCHAR * imageFileName){ return CxImage::Save(imageFileName,CXIMAGE_FORMAT_MNG);}
+   bool Encode(CxFile * hFile);
+   bool Encode(FILE *hFile) { CxIOFile file(hFile); return Encode(&file); }
+   bool Save(const TCHAR * imageFileName) { return CxImage::Save(imageFileName, CXIMAGE_FORMAT_MNG); }
 #endif // CXIMAGE_SUPPORT_ENCODE
 
-	int32_t Resume();
-	void SetSpeed(float speed);
-	
-	mng_handle hmng;
-	mngstuff mnginfo;
+   int32_t Resume();
+   void SetSpeed(float speed);
+
+   mng_handle hmng;
+   mngstuff mnginfo;
 protected:
-	void WritePNG(mng_handle hMNG, int32_t Frame, int32_t FrameCount );
-	void SetCallbacks(mng_handle mng);
+   void WritePNG(mng_handle hMNG, int32_t Frame, int32_t FrameCount);
+   void SetCallbacks(mng_handle mng);
 };
 
 #endif

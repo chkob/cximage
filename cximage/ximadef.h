@@ -4,58 +4,58 @@
 #include "ximacfg.h"
 
 #if /*defined(_AFXDLL)||*/defined(_USRDLL)
- #define DLL_EXP __declspec(dllexport)
+#define CXIMAGE_DLL_EXP __declspec(dllexport)
 #elif defined(_MSC_VER)&&(_MSC_VER<1200)
- #define DLL_EXP __declspec(dllimport)
+#define CXIMAGE_DLL_EXP __declspec(dllimport)
 #else
- #define DLL_EXP
+#define CXIMAGE_DLL_EXP
 #endif
 
 
 #if CXIMAGE_SUPPORT_EXCEPTION_HANDLING
-  #define cx_try try
-  #define cx_throw(message) throw(message)
-  #define cx_catch catch (const char *message)
+#define cx_try try
+#define cx_throw(message) throw(message)
+#define cx_catch catch (const char *message)
 #else
-  #define cx_try bool cx_error=false;
-  #define cx_throw(message) {cx_error=true; if(strcmp(message,"")) strncpy(info.szLastError,message,255); goto cx_error_catch;}
-  #define cx_catch cx_error_catch: char message[]=""; if(cx_error)
+#define cx_try bool cx_error=false;
+#define cx_throw(message) {cx_error=true; if(strcmp(message,"")) strncpy(info.szLastError,message,255); goto cx_error_catch;}
+#define cx_catch cx_error_catch: char message[]=""; if(cx_error)
 #endif
 
 
 #if CXIMAGE_SUPPORT_JP2 || CXIMAGE_SUPPORT_JPC || CXIMAGE_SUPPORT_PGX || CXIMAGE_SUPPORT_PNM || CXIMAGE_SUPPORT_RAS
- #define CXIMAGE_SUPPORT_JASPER 1
+#define CXIMAGE_SUPPORT_JASPER 1
 #else
- #define CXIMAGE_SUPPORT_JASPER 0
+#define CXIMAGE_SUPPORT_JASPER 0
 #endif
 
 #if CXIMAGE_SUPPORT_DSP
 #undef CXIMAGE_SUPPORT_TRANSFORMATION
- #define CXIMAGE_SUPPORT_TRANSFORMATION 1
+#define CXIMAGE_SUPPORT_TRANSFORMATION 1
 #endif
 
 #if CXIMAGE_SUPPORT_TRANSFORMATION || CXIMAGE_SUPPORT_TIF || CXIMAGE_SUPPORT_TGA || CXIMAGE_SUPPORT_BMP || CXIMAGE_SUPPORT_WINDOWS
- #define CXIMAGE_SUPPORT_BASICTRANSFORMATIONS 1
+#define CXIMAGE_SUPPORT_BASICTRANSFORMATIONS 1
 #endif
 
 #if CXIMAGE_SUPPORT_DSP || CXIMAGE_SUPPORT_TRANSFORMATION
 #undef CXIMAGE_SUPPORT_INTERPOLATION
- #define CXIMAGE_SUPPORT_INTERPOLATION 1
+#define CXIMAGE_SUPPORT_INTERPOLATION 1
 #endif
 
 #if (CXIMAGE_SUPPORT_DECODE == 0)
 #undef CXIMAGE_SUPPORT_EXIF
- #define CXIMAGE_SUPPORT_EXIF 0
+#define CXIMAGE_SUPPORT_EXIF 0
 #endif
 
 #if defined (_WIN32_WCE)
- #undef CXIMAGE_SUPPORT_WMF
- #define CXIMAGE_SUPPORT_WMF 0
+#undef CXIMAGE_SUPPORT_WMF
+#define CXIMAGE_SUPPORT_WMF 0
 #endif
 
 #if !defined(WIN32) && !defined(_WIN32_WCE)
- #undef CXIMAGE_SUPPORT_WINDOWS
- #define CXIMAGE_SUPPORT_WINDOWS 0
+#undef CXIMAGE_SUPPORT_WINDOWS
+#define CXIMAGE_SUPPORT_WINDOWS 0
 #endif
 
 #ifndef min
@@ -66,7 +66,7 @@
 #endif
 
 #ifndef PI
- #define PI 3.141592653589793f
+#define PI 3.141592653589793f
 #endif
 
 
@@ -83,7 +83,7 @@
 #ifndef _COMPLEX_DEFINED
 
 typedef struct tagcomplex {
-	double x,y;
+   double x, y;
 } _complex;
 
 #endif
@@ -92,8 +92,10 @@ typedef struct tagcomplex {
 
 #endif
 
-#if defined(WIN32) || defined(_WIN32_WCE)
- #include "stdint.h"
+#if (defined(WIN32) || defined(_WIN32_WCE)) && _MSC_VER <= 1600
+   #include "stdint.h"
+#else
+   #include <stdint.h>
 #endif
 
 #if !defined(WIN32) && !defined(_WIN32_WCE)
@@ -126,61 +128,61 @@ typedef void*      HRGN;
 
 typedef struct tagRECT
 {
-	int32_t    left;
-	int32_t    top;
-	int32_t    right;
-	int32_t    bottom;
+   int32_t    left;
+   int32_t    top;
+   int32_t    right;
+   int32_t    bottom;
 } RECT;
 
 typedef struct tagPOINT
 {
-	int32_t  x;
-	int32_t  y;
+   int32_t  x;
+   int32_t  y;
 } POINT;
 
 typedef struct tagRGBQUAD {
-	uint8_t    rgbBlue;
-	uint8_t    rgbGreen;
-	uint8_t    rgbRed;
-	uint8_t    rgbReserved;
+   uint8_t    rgbBlue;
+   uint8_t    rgbGreen;
+   uint8_t    rgbRed;
+   uint8_t    rgbReserved;
 } RGBQUAD;
 
 #pragma pack(1)
 
-typedef struct tagBITMAPINFOHEADER{
-	uint32_t   biSize;
-	int32_t    biWidth;
-	int32_t    biHeight;
-	uint16_t   biPlanes;
-	uint16_t   biBitCount;
-	uint32_t   biCompression;
-	uint32_t   biSizeImage;
-	int32_t    biXPelsPerMeter;
-	int32_t    biYPelsPerMeter;
-	uint32_t   biClrUsed;
-	uint32_t   biClrImportant;
+typedef struct tagBITMAPINFOHEADER {
+   uint32_t   biSize;
+   int32_t    biWidth;
+   int32_t    biHeight;
+   uint16_t   biPlanes;
+   uint16_t   biBitCount;
+   uint32_t   biCompression;
+   uint32_t   biSizeImage;
+   int32_t    biXPelsPerMeter;
+   int32_t    biYPelsPerMeter;
+   uint32_t   biClrUsed;
+   uint32_t   biClrImportant;
 } BITMAPINFOHEADER;
 
 typedef struct tagBITMAPFILEHEADER {
-	uint16_t   bfType;
-	uint32_t   bfSize;
-	uint16_t   bfReserved1;
-	uint16_t   bfReserved2;
-	uint32_t   bfOffBits;
+   uint16_t   bfType;
+   uint32_t   bfSize;
+   uint16_t   bfReserved1;
+   uint16_t   bfReserved2;
+   uint32_t   bfOffBits;
 } BITMAPFILEHEADER;
 
 typedef struct tagBITMAPCOREHEADER {
-	uint32_t   bcSize;
-	uint16_t   bcWidth;
-	uint16_t   bcHeight;
-	uint16_t   bcPlanes;
-	uint16_t   bcBitCount;
+   uint32_t   bcSize;
+   uint16_t   bcWidth;
+   uint16_t   bcHeight;
+   uint16_t   bcPlanes;
+   uint16_t   bcBitCount;
 } BITMAPCOREHEADER;
 
 typedef struct tagRGBTRIPLE {
-	uint8_t    rgbtBlue;
-	uint8_t    rgbtGreen;
-	uint8_t    rgbtRed;
+   uint8_t    rgbtBlue;
+   uint8_t    rgbtGreen;
+   uint8_t    rgbtRed;
 } RGBTRIPLE;
 
 #pragma pack()
@@ -198,7 +200,7 @@ typedef struct tagRGBTRIPLE {
 #ifndef _COMPLEX_DEFINED
 
 typedef struct tagcomplex {
-	double x,y;
+   double x, y;
 } _complex;
 
 #endif

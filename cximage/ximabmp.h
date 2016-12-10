@@ -33,7 +33,7 @@ const int32_t RLE_DELTA       = 2;
 
 #if CXIMAGE_SUPPORT_BMP
 
-class CxImageBMP: public CxImage
+class CXIMAGE_DLL_EXP CxImageBMP: public CxImage
 {
 public:
 	CxImageBMP(): CxImage(CXIMAGE_FORMAT_BMP) {};

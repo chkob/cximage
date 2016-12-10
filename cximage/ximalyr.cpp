@@ -1,6 +1,6 @@
 // xImaLyr.cpp : Layers functions
 /* 21/04/2003 v1.00 - Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  */
 
 #include "ximage.h"
@@ -47,7 +47,7 @@ bool CxImage::LayerCreate(int32_t position)
 	if (ptmp[position]){
 		ptmp[position]->info.pParent = this;
 	} else {
-		free(ptmp);
+		delete [] ptmp;
 		return false;
 	}
 

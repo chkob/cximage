@@ -2,7 +2,7 @@
  * File:	ximajbg.cpp
  * Purpose:	Platform Independent JBG Image Class Loader and Writer
  * 18/Aug/2002 Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  */
 
 #include "ximajbg.h"

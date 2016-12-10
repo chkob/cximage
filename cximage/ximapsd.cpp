@@ -2,7 +2,7 @@
  * File:	ximapsd.cpp
  * Purpose:	Platform Independent PSD Image Class Loader
  * Dec/2010 Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  *
  * libpsd (c) 2004-2007 Graphest Software
  *

@@ -2,7 +2,7 @@
  * File:	ximaexif.cpp
  * Purpose:	EXIF reader
  * 18/Aug/2002 Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  * based on jhead-1.8 by Matthias Wandel <mwandel(at)rim(dot)net>
  */
 
@@ -166,7 +166,7 @@ bool CxImageJPG::CxExifInfo::DecodeExif(CxFile * hFile, int32_t nReadMode)
                 // that uses marker 31 for non exif stuff.  Thus make sure 
                 // it says 'Exif' in the section before treating it as exif.
                 if ((nReadMode & EXIF_READ_EXIF) && memcmp(Data+2, "Exif", 4) == 0){
-                    m_exifinfo->IsExif = process_EXIF((uint8_t *)Data+2, itemlen);
+                    m_exifinfo->IsExif = process_EXIF((uint8_t *)Data+2, itemlen-2);
                 }else{
                     // Discard this section.
                     free(Sections[--SectionsRead].Data);
@@ -392,7 +392,7 @@ bool CxImageJPG::CxExifInfo::ProcessExifDir(uint8_t * DirStart, uint8_t * Offset
 
     NumDirEntries = Get16u(DirStart);
 
-    if ((DirStart+2+NumDirEntries*12) > (OffsetBase+ExifLength)){
+    if ((DirStart+2+NumDirEntries*12+2) > (OffsetBase+ExifLength)){
         strcpy(m_szLastError,"Illegally sized directory");
 		return false;
     }
@@ -650,7 +650,7 @@ bool CxImageJPG::CxExifInfo::ProcessExifDir(uint8_t * DirStart, uint8_t * Offset
 			if (Offset>8){
 				SubdirStart = OffsetBase + Offset;
 				if (SubdirStart < OffsetBase || 
-					SubdirStart > OffsetBase+ExifLength){
+					SubdirStart >= OffsetBase+ExifLength){
 					strcpy(m_szLastError,"Illegal subdirectory link");
 					return false;
 				}
@@ -673,7 +673,7 @@ bool CxImageJPG::CxExifInfo::ProcessExifDir(uint8_t * DirStart, uint8_t * Offset
         if (Offset){
             SubdirStart = OffsetBase + Offset;
             if (SubdirStart < OffsetBase 
-                || SubdirStart > OffsetBase+ExifLength){
+                || SubdirStart >= OffsetBase+ExifLength){
                 strcpy(m_szLastError,"Illegal subdirectory link");
 				return false;
             }

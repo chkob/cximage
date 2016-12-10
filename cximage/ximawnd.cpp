@@ -1,6 +1,6 @@
 // xImaWnd.cpp : Windows functions
 /* 07/08/2001 v1.00 - Davide Pizzolato - www.xdp.it
- * CxImage version 7.0.1 07/Jan/2011
+ * CxImage version 7.0.2 07/Feb/2011
  */
 
 #include "ximage.h"
@@ -1856,7 +1856,7 @@ void CxImage::InitTextInfo( CXTEXTINFO *txt )
     txt->lfont.lfClipPrecision = CLIP_DEFAULT_PRECIS; 
     txt->lfont.lfQuality       = PROOF_QUALITY; 
     txt->lfont.lfPitchAndFamily= DEFAULT_PITCH | FF_DONTCARE ; 
-    _stprintf( txt->lfont.lfFaceName, _T("Arial")); //use TCHAR mappings <Cesar M>
+    _tcscpy( txt->lfont.lfFaceName, _T("Arial")); //use TCHAR mappings <Cesar M>
 
     // initial colors
     txt->fcolor = RGB( 255,255,160 );  // default foreground: light goldyellow
@@ -1869,7 +1869,7 @@ void CxImage::InitTextInfo( CXTEXTINFO *txt )
     txt->b_outline = 0;     // default: no outline (OUTLINE NOT IMPLEMENTED AT THIS TIME)
     txt->b_round   = 20;    // default: rounding radius is 20% of the rectangle height
     // the text 
-    _stprintf( txt->text, _T("Sample Text 01234õû")); // text use TCHAR mappings <Cesar M>
+    _tcscpy( txt->text, _T("Sample Text")); // text use TCHAR mappings <Cesar M>
     txt->align = DT_CENTER;
     return;
 }
