@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -7,5 +7,70 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{A462C8EC-258E-39C7-80EC-13BA099A86F4}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\tif_xfile.cpp" />
+    <ClCompile Include="..\ximabmp.cpp" />
+    <ClCompile Include="..\ximadsp.cpp" />
+    <ClCompile Include="..\ximaenc.cpp" />
+    <ClCompile Include="..\ximaexif.cpp" />
+    <ClCompile Include="..\ximage.cpp" />
+    <ClCompile Include="..\ximagif.cpp" />
+    <ClCompile Include="..\ximahist.cpp" />
+    <ClCompile Include="..\ximaico.cpp" />
+    <ClCompile Include="..\ximainfo.cpp" />
+    <ClCompile Include="..\ximaint.cpp" />
+    <ClCompile Include="..\ximajas.cpp" />
+    <ClCompile Include="..\ximajbg.cpp" />
+    <ClCompile Include="..\ximajpg.cpp" />
+    <ClCompile Include="..\ximalpha.cpp" />
+    <ClCompile Include="..\ximalyr.cpp" />
+    <ClCompile Include="..\ximamng.cpp" />
+    <ClCompile Include="..\ximapal.cpp" />
+    <ClCompile Include="..\ximapcx.cpp" />
+    <ClCompile Include="..\ximapng.cpp" />
+    <ClCompile Include="..\ximapsd.cpp" />
+    <ClCompile Include="..\ximaraw.cpp" />
+    <ClCompile Include="..\ximasel.cpp" />
+    <ClCompile Include="..\ximaska.cpp" />
+    <ClCompile Include="..\ximatga.cpp" />
+    <ClCompile Include="..\ximath.cpp" />
+    <ClCompile Include="..\ximatif.cpp" />
+    <ClCompile Include="..\ximatran.cpp" />
+    <ClCompile Include="..\ximawbmp.cpp" />
+    <ClCompile Include="..\ximawmf.cpp" />
+    <ClCompile Include="..\ximawnd.cpp" />
+    <ClCompile Include="..\xmemfile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\stdint.h" />
+    <ClInclude Include="..\xfile.h" />
+    <ClInclude Include="..\ximabmp.h" />
+    <ClInclude Include="..\ximacfg.h" />
+    <ClInclude Include="..\ximadef.h" />
+    <ClInclude Include="..\ximage.h" />
+    <ClInclude Include="..\ximagif.h" />
+    <ClInclude Include="..\ximaico.h" />
+    <ClInclude Include="..\ximaiter.h" />
+    <ClInclude Include="..\ximajas.h" />
+    <ClInclude Include="..\ximajbg.h" />
+    <ClInclude Include="..\ximajpg.h" />
+    <ClInclude Include="..\ximamng.h" />
+    <ClInclude Include="..\ximapcx.h" />
+    <ClInclude Include="..\ximapng.h" />
+    <ClInclude Include="..\ximapsd.h" />
+    <ClInclude Include="..\ximaraw.h" />
+    <ClInclude Include="..\ximaska.h" />
+    <ClInclude Include="..\ximatga.h" />
+    <ClInclude Include="..\ximath.h" />
+    <ClInclude Include="..\ximatif.h" />
+    <ClInclude Include="..\ximawbmp.h" />
+    <ClInclude Include="..\ximawmf.h" />
+    <ClInclude Include="..\xiofile.h" />
+    <ClInclude Include="..\xmemfile.h" />
+    <ClInclude Include="CxImageMfcDll.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CxImageMfcDll.rc" />
   </ItemGroup>
 </Project>
