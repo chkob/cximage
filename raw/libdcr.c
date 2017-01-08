@@ -786,7 +786,8 @@ enough to decode Canon, Kodak and Adobe DNG images.
 
 int DCR_CLASS dcr_ljpeg_start (DCRAW* p, struct dcr_jhead *jh, int info_only)
 {
-	int c, tag, len;
+	int c, tag;
+	ushort len;
 	uchar data[0x10000], *dp;
 
 	if (!info_only) dcr_init_decoder(p);
