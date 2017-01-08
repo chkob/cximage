@@ -67,6 +67,7 @@ bool CxImagePNG::Decode(CxFile *hFile)
 	if(setjmp(png_jmpbuf(png_ptr))){
 		/* Free all of the memory associated with the png_ptr and info_ptr */
 		delete [] row_pointers;
+        row_pointers = nullptr;
 		png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);
 		cx_throw("");
 	}
@@ -300,7 +301,7 @@ bool CxImagePNG::Decode(CxFile *hFile)
 	}
 
 	delete [] row_pointers;
-	row_pointers = NULL;
+    row_pointers = nullptr;
 
 	/* read the rest of the file, getting any additional chunks in info_ptr - REQUIRED */
 	png_read_end(png_ptr, info_ptr);
@@ -530,7 +531,7 @@ bool CxImagePNG::Encode(CxFile *hFile)
 	}
 
 	delete [] row_pointers;
-	row_pointers = NULL;
+    row_pointers = nullptr;
 
 	//if necessary, restore the original palette
 	if (!bGrayScale && head.biClrUsed && info.nBkgndIndex>0)
